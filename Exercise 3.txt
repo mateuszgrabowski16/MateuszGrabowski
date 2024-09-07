@@ -1,0 +1,64 @@
+-- task 1
+CREATE TABLE Employees_1(
+EmployeeID int primary key auto_increment,
+FirstName varchar(50) not null,
+LastName varchar(50) not null,
+BirthDate date not null,
+HireDate date not null,
+Salary decimal(10,2) default 300000,
+check(Salary>0),
+UNIQUE(FirstName));
+
+CREATE TABLE Projects(
+ProjectID int primary key auto_increment,
+ProjectName varchar(50) not null);
+
+CREATE TABLE Assignments(
+AssignmentID int primary key auto_increment,
+StartDate date not null);
+
+-- task 2
+INSERT INTO employees_1 (EmployeeID, FirstName, LastName, BirthDate, HireDate, Salary)
+VALUES (5, 'Agnieszka', 'Zeus', '1997-09-23', '2024-05-15', 6000);
+
+INSERT INTO Projects (ProjectID, ProjectName)
+VALUES (5, 'Superman');
+
+INSERT INTO Assignments (AssignmentID, StartDate)
+VALUES (5, '2023-02-22');
+
+-- task 3
+select firstname, lastname, projectname
+from employees_1 e
+left join projects p
+on p.projectID = e.EmployeeID;
+
+-- task 4
+select count(*), projectname
+from employees_1 e
+left join projects p
+on p.projectID = e.EmployeeID
+group by projectname;
+
+-- task 5
+select round(avg(salary),2), projectname
+from employees_1 e
+left join projects p
+on p.projectID = e.EmployeeID
+group by projectname;
+
+-- task 6
+select projectname, startdate, firstname, lastname 
+from projects p
+left join assignments a
+on a.assignmentid = p.projectid
+left join employees e
+on e.employeeid = p.projectid;
+
+-- task 7
+select count(*) as number_of_assignments, projectname
+from projects p
+left join assignments a
+on a.assignmentid = p.projectid
+group by projectname
+having number_of_assignments > 2;

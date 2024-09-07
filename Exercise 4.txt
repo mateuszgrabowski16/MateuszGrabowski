@@ -1,0 +1,34 @@
+-- task 1
+update employees_1
+set Salary = -400000;
+
+-- task 2
+-- not needed
+
+-- task 3 
+select firstname, lastname, projectname
+from employees_1 e
+left join projects p
+on p.projectID = e.EmployeeID;
+
+-- task 4
+select firstname, lastname, projectname
+from employees_1 e
+left join projects p
+on p.projectID = e.EmployeeID
+where p.projectID <> e.EmployeeID;
+
+-- task 5
+select firstname, lastname, projectname
+from employees_1 e
+left join projects p
+on p.projectID = e.EmployeeID
+where p.projectID = e.EmployeeID
+OR p.projectID <> e.EmployeeID;
+
+-- task 6
+select firstname, lastname, projectname, count(*) * 100 / sum(count(*)) over () as percentage
+from employees_1 e
+left join projects p
+on p.projectID = e.EmployeeID
+group by firstname, lastname, projectname;

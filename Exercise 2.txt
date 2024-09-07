@@ -1,0 +1,41 @@
+-- EXERCISE 2
+
+-- task 1
+use kurs_sql;
+
+select last_name, enrollment_date
+from students s
+left join enrollments e
+on e.enrollment_id = s.student_id
+where enrollment_date < '2023-01-01';
+
+-- task 2
+select YEAR(enrollment_date) as year_of_enrollment, month(enrollment_date) as month_of_enrollment, course_name, first_name, last_name
+from students s
+left join enrollments e
+on e.student_id = s.student_id
+left join courses c
+on c.course_id = e.course_id
+group by year_of_enrollment, month_of_enrollment, course_name, first_name, last_name
+order by year_of_enrollment, month_of_enrollment;
+
+-- task 3
+select last_name, count(*) as number_of_enrollments
+from students s
+left join enrollments e
+on e.student_id = s.student_id
+group by last_name
+having number_of_enrollments = 1;
+
+-- task 4
+select course_name, first_name, last_name, timestampdiff(year,date_of_birth,now()) as year_of_student,
+	case
+		when timestampdiff(year,date_of_birth,now()) < 20 then 'below 20'
+        when timestampdiff(year,date_of_birth,now()) between 20 and 25 then '20-25'
+        when timestampdiff(year,date_of_birth,now()) < 30 then 'below 30'
+			end as age_range
+from students s
+left join enrollments e
+on e.student_id = s.student_id
+left join courses c
+on c.course_id = e.course_id;
