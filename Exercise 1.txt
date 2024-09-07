@@ -1,48 +1,66 @@
--- task 1
+-- EXERCISE 1
 
-create database ecommerce;
+-- part 1.1
+CREATE DATABASE COMPANYDB;
 
-use ecommerce;
+use COMPANYDB;
 
-create table customers(
-	customer_id int primary key auto_increment,
-    first_name varchar(50),
-    last_name varchar(50),
-    email varchar(100) unique,
-    phone_number varchar(15)
-    );
-    
-create table products(
-	product_id int primary key auto_increment,
-    product_name varchar(100),
-    price decimal(10,2),
-    stock_quantity int
-    );
-    
-create table orders(
-	order_id int primary key auto_increment,
-    customer_id int, foreign key (customer_id) references customers(customer_id),
-    order_date date,
-    total_amount decimal(10,2)
-    );
-    
-create table order_items(
-	order_item_id int primary key auto_increment,
-    order_id int, foreign key(order_id) references orders(order_id),
-    product_id int, foreign key(product_id) references products(product_id),
-    quantity int,
-    price decimal(10,2)
-    );
-    
-start transaction;
+-- part 1.2 and 1.3
+CREATE TABLE Employees(
+EmployeeID int primary key auto_increment,
+FirstName varchar(50) not null,
+LastName varchar(50) not null,
+BirthDate date not null,
+HireDate date not null,
+Salary decimal(10,2) default 300000,
+check(Salary>0),
+UNIQUE(FirstName, LastName));
 
-insert into customers (customer_id, first_name, last_name, email, phone_number)
-values (1, 'Michal', 'Zdychal', 'michalzdychal@gmail.com', 123456789);
-insert into products (product_id, product_name, price, stock_quantity)
-values(1, 'pralka', 3000, 4);
-insert into orders (order_id, customer_id, order_date, total_amount)
-values(1, 1, '2024-05-21', 6000);
-insert into order_items (order_item_id, order_id, product_id, quantity, price)
-values(1, 1, 1, 2, 6000);
+-- part 1.4
+CREATE TABLE Departments(
+DepartmentID int primary key auto_increment,
+DepartmentName varchar(100) not null unique);
 
-commit;
+-- part 1.5
+CREATE TABLE Employees(
+EmployeeID int primary key auto_increment,
+FirstName varchar(50) not null,
+LastName varchar(50) not null,
+BirthDate date not null,
+HireDate date not null,
+Salary decimal(10,2) default 300000,
+check(Salary>0),
+UNIQUE(FirstName),
+FOREIGN KEY (DepartmentID) REFERENCES Employees(EmployeeID));
+
+-- part 2.1
+INSERT INTO departments (DepartmentID, DepartmentName)
+VALUES (3, 'Logistyka');
+
+-- part 2.2
+INSERT INTO employees (EmployeeID, FirstName, LastName, BirthDate, HireDate, Salary)
+VALUES (3, 'Mikołaj', 'Styczeń', '1999-03-23', '2024-05-15', 4000);
+
+-- part 2.3
+select*
+from employees;
+
+-- part 2.4
+select *
+from employees
+where Salary > 4000;
+
+-- part 2.5
+select *
+from employees
+where EmployeeID = 1;
+
+-- part 2.6
+UPDATE employees
+SET Salary = Salary * '0,1'
+WHERE HireDate < year(BirthDate) = '2000'; 
+
+-- part 2.7
+DELETE
+FROM employees
+WHERE Salary < 3000;
