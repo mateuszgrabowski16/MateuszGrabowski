@@ -58,7 +58,7 @@ where EmployeeID = 1;
 -- part 2.6
 UPDATE employees
 SET Salary = Salary * '0,1'
-WHERE HireDate < year(BirthDate) = '2000'; 
+WHERE HireDate < year(BirthDate) = '2020'; 
 
 -- part 2.7
 DELETE
