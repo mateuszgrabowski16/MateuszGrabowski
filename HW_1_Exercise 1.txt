@@ -1,0 +1,61 @@
+-- EXERCISE 1
+
+-- part 1.1
+CREATE DATABASE COMPANYDB;
+
+use COMPANYDB;
+
+-- part 1.2 and 1.3
+CREATE TABLE Employees(
+EmployeeID int primary key auto_increment,
+FirstName varchar(50) not null,
+LastName varchar(50) not null,
+BirthDate date not null,
+HireDate date not null,
+Salary decimal(10,2) default 300000,
+check(Salary>0),
+UNIQUE(FirstName, LastName),
+FOREIGN KEY (DepartmentID) REFERENCES Employees(EmployeeID));
+
+-- part 1.4
+CREATE TABLE Departments(
+DepartmentID int primary key auto_increment,
+DepartmentName varchar(100) not null unique);
+
+-- part 1.5
+ALTER TABLE Employees
+ADD COLUMN (DepartmentID) varchar(100) not null unique,
+FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID));
+; 
+
+-- part 2.1
+INSERT INTO departments (DepartmentID, DepartmentName)
+VALUES (5, 'Sprzedaż');
+
+-- part 2.2
+INSERT INTO employees (EmployeeID, FirstName, LastName, BirthDate, HireDate, Salary)
+VALUES (5, 'Mateusz', 'Iksinski', '1999-03-23', '2024-05-15', 4000);
+
+-- part 2.3
+select*
+from employees;
+
+-- part 2.4
+select *
+from employees
+where Salary > 4000;
+
+-- part 2.5
+select *
+from employees
+where EmployeeID = 1;
+
+-- part 2.6
+UPDATE employees
+SET Salary = Salary * '0,1'
+WHERE HireDate < year(BirthDate) = '2020'; 
+
+-- part 2.7
+DELETE
+FROM employees
+WHERE Salary < 3000;
