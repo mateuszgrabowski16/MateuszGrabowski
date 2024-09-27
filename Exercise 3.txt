@@ -1,64 +1,59 @@
--- task 1
-CREATE TABLE Employees_1(
-EmployeeID int primary key auto_increment,
-FirstName varchar(50) not null,
-LastName varchar(50) not null,
-BirthDate date not null,
-HireDate date not null,
-Salary decimal(10,2) default 300000,
-check(Salary>0),
-UNIQUE(FirstName));
+#Exercise 3
 
-CREATE TABLE Projects(
-ProjectID int primary key auto_increment,
-ProjectName varchar(50) not null);
+#1
 
-CREATE TABLE Assignments(
-AssignmentID int primary key auto_increment,
-StartDate date not null);
+def sort_list(lst):
+    return sorted(lst)
+list = [7,18,3,24,5]
+list.sort()
+print(list)
 
--- task 2
-INSERT INTO employees_1 (EmployeeID, FirstName, LastName, BirthDate, HireDate, Salary)
-VALUES (5, 'Agnieszka', 'Zeus', '1997-09-23', '2024-05-15', 6000);
+[3, 5, 7, 18, 24]
 
-INSERT INTO Projects (ProjectID, ProjectName)
-VALUES (5, 'Superman');
+#2
 
-INSERT INTO Assignments (AssignmentID, StartDate)
-VALUES (5, '2023-02-22');
+def find_element(lst, target):
+    return target in lst
+list = [1,2,3,4,5]
+target = 6
+result = find_element(list,target)
+print(result)
 
--- task 3
-select firstname, lastname, projectname
-from employees_1 e
-left join projects p
-on p.projectID = e.EmployeeID;
+False
 
--- task 4
-select count(*), projectname
-from employees_1 e
-left join projects p
-on p.projectID = e.EmployeeID
-group by projectname;
+#3
 
--- task 5
-select round(avg(salary),2), projectname
-from employees_1 e
-left join projects p
-on p.projectID = e.EmployeeID
-group by projectname;
+def sort_and_find(lst_target):
+    list.sort()
+    return find_element(list,target)
+list = [1,2,3,7,5]
+target = 8
+result = sort_and_find(list)
+print(result)
 
--- task 6
-select projectname, startdate, firstname, lastname 
-from projects p
-left join assignments a
-on a.assignmentid = p.projectid
-left join employees e
-on e.employeeid = p.projectid;
+False
 
--- task 7
-select count(*) as number_of_assignments, projectname
-from projects p
-left join assignments a
-on a.assignmentid = p.projectid
-group by projectname
-having number_of_assignments > 2;
+#4
+
+def insert_element(lst,element):
+    list.append(element)
+    return lst
+list = [1,2,3,4,5]
+new_number = 6
+updated_list = insert_element(list,new_number)
+print(updated_list)
+
+[1, 2, 3, 4, 5, 6]
+
+#5
+
+def remove_element(lst,element):
+    if element in lst:
+        lst.remove(element)
+    return lst
+list = [1,2,3,4,5]
+remove_number = 7
+updated_list = remove_element(list,remove_number)
+print(updated_list)
+
+[1, 2, 3, 4, 5]

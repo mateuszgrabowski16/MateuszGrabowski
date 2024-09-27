@@ -1,0 +1,56 @@
+#Exercise5
+
+#1
+
+def to_lowercase(s):
+    return s.lower()
+text = "Python i SQL jest fajny"
+x = text.lower()
+print(x)
+
+python i sql jest fajny
+
+#2
+
+def to_uppercase(s):
+    return s.upper()
+text = "Python i SQL jest fajny"
+x = text.upper()
+print(x)
+
+PYTHON I SQL JEST FAJNY
+
+#3
+
+import string
+
+def clean_text(s):
+    translator = str.maketrans('', '', string.punctuation)
+    cleaned_text = s.translate(translator)
+    return cleaned_text
+
+text = "Python, SQL jest fajny!?"
+cleaned_string = clean_text(text)
+print(cleaned_string)
+
+Python SQL jest fajny
+
+#4
+
+def word_count(string):
+    return len(string.split())
+
+word_count("Python i ma SQL jest fajny!?")
+
+6
+
+#5
+
+def replace_spaces(string):
+    return string.replace(" ","_")
+
+replace_spaces("Python i SQL jest fajny")
+
+'Python_i_SQL_jest_fajny'
+
+

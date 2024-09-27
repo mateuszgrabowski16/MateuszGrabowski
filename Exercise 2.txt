@@ -1,51 +1,45 @@
--- EXERCISE 2
+#Exercise 2
 
--- task 1
-use kurs_sql;
+#3
 
-select last_name, enrollment_date
-from students s
-left join enrollments e
-on e.enrollment_id = s.student_id
-where enrollment_date < '2023-01-01';
+my_string = 'Mateusz'
+len(my_string)
 
--- task 2
-select YEAR(enrollment_date) as year_of_enrollment, month(enrollment_date) as month_of_enrollment, course_name, first_name, last_name
-from students s
-left join enrollments e
-on e.student_id = s.student_id
-left join courses c
-on c.course_id = e.course_id
-group by year_of_enrollment, month_of_enrollment, course_name, first_name, last_name
-order by year_of_enrollment, month_of_enrollment;
+7
 
--- task 3
-select last_name, count(*) as number_of_enrollments
-from students s
-left join enrollments e
-on e.student_id = s.student_id
-group by last_name
-having number_of_enrollments = 1;
+for ind in range(len(my_string)-1,-1,-1):
+    print(my_string[ind])
 
--- task 4
-select course_name, first_name, last_name, timestampdiff(year,date_of_birth,now()) as year_of_student,
-	case
-		when timestampdiff(year,date_of_birth,now()) < 20 then 'below 20'
-        when timestampdiff(year,date_of_birth,now()) between 20 and 25 then '20-25'
-        when timestampdiff(year,date_of_birth,now()) < 30 then 'below 30'
-			end as age_range
-from students s
-left join enrollments e
-on e.student_id = s.student_id
-left join courses c
-on c.course_id = e.course_id;
+z
+s
+u
+e
+t
+a
+M
 
--- task 5
-select course_name, count(*) as number_of_courses, YEAR(enrollment_date)
-from courses c
-left join enrollments e
-on e.course_id = c.course_id
-left join students s
-on s.student_id = e.student_id
-group by course_name, YEAR(enrollment_date)
-order by YEAR(enrollment_date);
+new_string = ""
+for ind in range(len(my_string)-1,-1,-1):
+    new_string = new_string + my_string[ind]
+    
+print(new_string)
+
+zsuetaM
+
+#1
+
+text = "Python i SQL jest fajny"
+x = text.upper()
+print(x)
+
+PYTHON I SQL JEST FAJNY
+
+#2
+
+txt = "I like Python"
+
+x = txt.replace(" ", "_")
+
+print(x)
+
+I_like_Python

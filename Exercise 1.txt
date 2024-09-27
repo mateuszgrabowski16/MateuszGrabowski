@@ -1,66 +1,109 @@
--- EXERCISE 1
+#Basic/Intermediate Python 2
+#Exercise 1
 
--- part 1.1
-CREATE DATABASE COMPANYDB;
+#1
 
-use COMPANYDB;
+"""
+Function which taken any string and return this string
+"""
 
--- part 1.2 and 1.3
-CREATE TABLE Employees(
-EmployeeID int primary key auto_increment,
-FirstName varchar(50) not null,
-LastName varchar(50) not null,
-BirthDate date not null,
-HireDate date not null,
-Salary decimal(10,2) default 300000,
-check(Salary>0),
-UNIQUE(FirstName, LastName));
+#definiowanie przykładowej funkcji
+def my_function():
+#wydrukowanie rezultatu funkcji
+    print("Hi Mateusz!")
 
--- part 1.4
-CREATE TABLE Departments(
-DepartmentID int primary key auto_increment,
-DepartmentName varchar(100) not null unique);
+my_function()
 
--- part 1.5
-CREATE TABLE Employees(
-EmployeeID int primary key auto_increment,
-FirstName varchar(50) not null,
-LastName varchar(50) not null,
-BirthDate date not null,
-HireDate date not null,
-Salary decimal(10,2) default 300000,
-check(Salary>0),
-UNIQUE(FirstName),
-FOREIGN KEY (DepartmentID) REFERENCES Employees(EmployeeID));
+Hi Mateusz!
 
--- part 2.1
-INSERT INTO departments (DepartmentID, DepartmentName)
-VALUES (3, 'Logistyka');
 
--- part 2.2
-INSERT INTO employees (EmployeeID, FirstName, LastName, BirthDate, HireDate, Salary)
-VALUES (3, 'Mikołaj', 'Styczeń', '1999-03-23', '2024-05-15', 4000);
+"""
+Function which takes th number and check for cross dependencies
+- jeżeli reszta z dzielenie przez 2 = 0 i liczba < 20 funkcja zwraca string 'liczba jest parzysta i mniejsza od 20'
+- jeżeli liczba < 50 zwraca string 'liczba mniejsza od 50'
+- w innym przypadku zwraca string 'liczba większa bądź równa 50'
+"""
 
--- part 2.3
-select*
-from employees;
+#zdefiniowanie wartości liczby
+number = 18
+#pierwszy warunek sprawdzajacy czy liczba jest mniejsza od 20 i czy jest parzysta
+if number <20:
+    if number%2 == 0:
+        print("Number is even")
+    print("Number is less than 20")
+#drugi warunek sprawdzajacy czy liczba jest mniejsza od 50
+elif number < 50:
+    print("Number is less than 50")
+#trzeci warunek sprawdzajacy czy liczba jest większa lub równa 50
+else:
+    print("Number is greater than or equal to 50")
 
--- part 2.4
-select *
-from employees
-where Salary > 4000;
+Number is even
+Number is less than 20
 
--- part 2.5
-select *
-from employees
-where EmployeeID = 1;
+""""
+Function that takes list of school classes, iterate through each of them and create an an output as a list of those classes
+"""
+#list definition
+classes = ["English","Mathematics","Polish","Physics","Art"]
+#for loop to iterate through every element from the list
+for classes in classes:
+#print statement to print result of the function
+    print(classes)
 
--- part 2.6
-UPDATE employees
-SET Salary = Salary * '0,1'
-WHERE HireDate < year(BirthDate) = '2020'; 
+English
+Mathematics
+Polish
+Physics
+Art
 
--- part 2.7
-DELETE
-FROM employees
-WHERE Salary < 3000;
+
+#2
+
+def find_max(numbers):
+    """
+    Finds the maximum number in a list.
+    """
+    max_num = 0  # Bug: If all numbers are negative, this will fail
+    for num in numbers:
+        if num > max_num:
+            max_num = num
+        # Debug: Print the current max after each comparison
+        print(f"[DEBUG] Current max: {max_num}")
+    
+    return max_num
+
+# Test data
+numbers = [3, 1, 4, 1, 5, 9, -2, -7]
+
+# Debug: Print the list of numbers
+print(f"[DEBUG] Numbers: {numbers}")
+
+# Bug 1: Missing argument for the sum_numbers function
+print(f"Sum of numbers: {sum_numbers()}")  # This will raise an error
+
+# Bug 2: Incorrect max_num initialization
+print(f"Maximum number: {find_max(numbers)}")  # May return wrong result if list has negative numbers
+
+"""
+Step 1: When running the script, it will throw an error for the sum_numbers() function because it was called without the argument.
+Step 2: The debug print inside the find_max() function shows the progress of finding the max, helping trace the problem with negative numbers.
+"""
+
+[DEBUG] Numbers: [3, 1, 4, 1, 5, 9, -2, -7]
+
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[20], line 21
+     18 print(f"[DEBUG] Numbers: {numbers}")
+     20 # Bug 1: Missing argument for the sum_numbers function
+---> 21 print(f"Sum of numbers: {sum_numbers()}")  # This will raise an error
+     23 # Bug 2: Incorrect max_num initialization
+     24 print(f"Maximum number: {find_max(numbers)}")  # May return wrong result if list has negative numbers
+
+NameError: name 'sum_numbers' is not defined
+
+
+
+
+
