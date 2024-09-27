@@ -1,0 +1,24 @@
+#Basic/Intermediate Python 1
+
+#Exercise 1
+
+def convert_to_integers(lst):
+    converted_list = []
+    for item in lst:
+        try:
+            converted_item = int(item)
+            converted_list.append(converted_item)
+        except (ValueError, TypeError) as e:
+            print(f"Error converting {item}: {e}")
+            continue  
+
+    return converted_list
+
+data = ['4', 3.14, 'invalid', 'yes', '30.5', '100', 45.99]
+converted_data = convert_to_integers(data)
+print(converted_data)
+
+Error converting invalid: invalid literal for int() with base 10: 'invalid'
+Error converting yes: invalid literal for int() with base 10: 'yes'
+Error converting 30.5: invalid literal for int() with base 10: '30.5'
+[4, 3, 100, 45]
