@@ -1,0 +1,26 @@
+-- 1;
+CREATE VIEW students_birth_date AS(
+	SELECT	first_name, last_name, date_of_birth
+    FROM students);
+    
+-- 2;
+CREATE VIEW courses_with_students AS(
+	SELECT DISTINCT course_name, count(*) number_of_students
+    FROM courses c
+    LEFT JOIN enrollments e
+    ON e.course_id = c.course_id
+    LEFT JOIN students s
+    ON s.student_id = e.student_id
+    GROUP BY course_name
+    );
+    
+-- 3;
+
+ALTER VIEW students_birth_date AS(
+SELECT	first_name, last_name, date_of_birth
+FROM students s
+WHERE year(s.date_of_birth) > '2000'
+);
+    
+-- 4
+DROP VIEW students_birth_date;
